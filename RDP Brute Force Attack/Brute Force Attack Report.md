@@ -21,7 +21,7 @@ Key findings:
 - Target account: **administrator**  
 - Failure reason: **Unknown user name or bad password**
 
-![Sample Log](RDP%20Brute%20Force%20Attack/Screenshots/sample_log.png)
+![Sample Log](Screenshots/sample_log.png)
 
 
 ---
@@ -45,7 +45,7 @@ Source Port:\s+(?<src_port>\d+)
 
 Using AbuseIPDB, the attacker’s IP address (133.161.192.227) was found to be associated with Vietnam, indicating an external malicious actor.
 
-![AbuseIPDB](RDP%20Brute%20Force%20Attack/Screenshots/abuseipdb_results.png)
+![AbuseIPDB](Screenshots/abuseipdb_results.png)
 
 ---
 
@@ -58,7 +58,7 @@ Analysis of the extracted source ports using Splunk’s stats command indicate t
 source="BTLO_Bruteforce_Challenge.txt" host="BTLO" index="btlo" sourcetype="btlo_bruteforce_security_logs"
 | stats max(src_port) as HighestPort, min(src_port) as LowestPort
 ```
-![Port Range](RDP%20Brute%20Force%20Attack/Screenshots/port_range.png)
+![Port Range](Screenshots/port_range.png)
 
 ### Time Elapsed
 ```SPL
@@ -66,7 +66,7 @@ source="BTLO_Bruteforce_Challenge.txt" host="BTLO" index="btlo" sourcetype="btlo
 | stats count min(_time) as first_attempt max(_time) as last_attempt by src_ip
 | eval duration_minutes=(last_attempt-first_attempt)/60
 ```
-![Attack Duration](RDP%20Brute%20Force%20Attack/Screenshots/attack_duration.png)
+![Attack Duration](Screenshots/attack_duration.png)
 
 ---
 
